@@ -65,6 +65,9 @@ body::before {
     border-radius: 14px;
     border: 1px solid rgba(11,99,184,0.06);
     transform: translateY(10px) scale(0.996);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slide.current-slide {
@@ -86,15 +89,25 @@ body::before {
 /* content container */
 .slide-content {
     max-width: 86%;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100%;
     gap: 1rem;
     z-index: 2;
     transform-origin: center;
     transition: transform 0.45s cubic-bezier(0.2,0,0.12,1);
+}
+
+/* ensure text blocks keep readable line-length and stay centered */
+.slide-content > * {
+    width: 100%;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .slide.current-slide .slide-content {
@@ -220,10 +233,15 @@ li {
 
 /* slight adjustment for small screens */
 @media (max-width: 720px) {
+    :root { --slide-padding: 1.25rem; }
     .title-slide h1 { font-size: 1.2rem; margin-bottom: 0.4rem; }
     .title-accent { width: 56px; height: 6px; margin-bottom: 0.8rem; }
     .title-slide::before { display: none; }
     .authors { padding: 0.6rem 0.8rem; }
+    .slide { padding: 1.25rem; }
+    .slide-content > * { max-width: 92%; }
+    .video-wrapper { padding-top: 56.25%; border-radius: 6px; box-shadow: none; }
+    .video-placeholder { height: 140px; }
 }
 
 /* lists */
@@ -472,6 +490,8 @@ ul.small-list li {
     margin-top: 1rem;
     width: 100%;
     max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
     background: linear-gradient(180deg,#eef9ff 0%, #dbeafe 100%);
     border-radius: 10px;
     overflow: hidden;
@@ -491,14 +511,23 @@ ul.small-list li {
     background: transparent;
 }
 
-/* mobile adjustments */
+/* small screens adjustments: reduce padding so content remains centered in box */
 @media (max-width: 720px) {
+    :root { --slide-padding: 1.25rem; }
+    .title-slide h1 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .title-accent { width: 56px; height: 6px; margin-bottom: 0.8rem; }
+    .title-slide::before { display: none; }
+    .authors { padding: 0.6rem 0.8rem; }
+    .slide { padding: 1.25rem; }
+    .slide-content > * { max-width: 92%; }
     .video-wrapper { padding-top: 56.25%; border-radius: 6px; box-shadow: none; }
     .video-placeholder { height: 140px; }
 }
 
-/* small screens adjust typography */
+/* medium screens: slightly tighter max-width so content appears centered in the box */
 @media (min-width: 721px) and (max-width: 1100px) {
+    .methodology-grid { grid-template-columns: repeat(2, 1fr); }
+    .slide-content { max-width: 88%; }
     .slide { padding: 3rem; }
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.6rem; }
